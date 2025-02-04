@@ -10,6 +10,8 @@ int main()
         BeginDrawing();
         ClearBackground(RAYWHITE);
         DrawText("Hello, World!", 100, 100, 20, RED);
+        DrawFPS(10, 10);
+        DrawCircle(GetMouseX(), GetMouseY(), 10, GREEN);
         EndDrawing();
     }
 }
