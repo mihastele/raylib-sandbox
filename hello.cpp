@@ -5,7 +5,7 @@ int main()
 {
     InitWindow(800, 450, "Hello, Raylib!");
 
-    while (true)
+    while (!WindowShouldClose())
     {
         BeginDrawing();
         ClearBackground(RAYWHITE);
