@@ -16,14 +16,16 @@ int main()
     InitWindow(windowWidth, windowHeight, "Hello, Raylib!");
 
     Texture2D playerTexture = LoadTexture("textures/player.png");
+    Texture2D nebula = LoadTexture("textures/12_nebula_spritesheet.png");
+
     Rectangle playerRec;
     playerRec.width = playerTexture.width / 6;
     playerRec.height = playerTexture.height;
     playerRec.x = 0;
     playerRec.y = 0;
     Vector2 playerPos;
-    playerPos.x = windowWidth / 2 - playerTexture.width / 2;
-    playerPos.y = windowHeight - playerTexture.height;
+    playerPos.x = windowWidth / 2 - playerRec.width / 2;
+    playerPos.y = windowHeight - playerRec.height;
 
     // animation frame
     int frame{};
@@ -75,4 +77,7 @@ int main()
 
         EndDrawing();
     }
+
+    UnloadTexture(playerTexture);
+    UnloadTexture(nebula);
 }
