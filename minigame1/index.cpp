@@ -11,6 +11,10 @@ int main()
     bool isInAir{};
     int jumpVal{-18};
 
+        int velocity{0};
+
+    InitWindow(windowWidth, windowHeight, "Hello, Raylib!");
+
     Texture2D playerTexture = LoadTexture("textures/player.png");
     Rectangle playerRec;
     playerRec.width = playerTexture.width / 6;
@@ -20,10 +24,6 @@ int main()
     Vector2 playerPos;
     playerPos.x = windowWidth / 2 - playerTexture.width / 2;
     playerPos.y = windowHeight - playerTexture.height;
-
-    int velocity{0};
-
-    InitWindow(windowWidth, windowHeight, "Hello, Raylib!");
 
     SetTargetFPS(50);
     while (!WindowShouldClose())
