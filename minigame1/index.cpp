@@ -6,12 +6,12 @@ int main()
     int windowWidth{800};
     int windowHeight{450};
 
-    const int gravity{1};
+    const int gravity{1'000};
 
     bool isInAir{};
-    int jumpVal{-18};
+    int jumpVal{-600};
 
-        int velocity{0};
+    int velocity{0};
 
     InitWindow(windowWidth, windowHeight, "Hello, Raylib!");
 
@@ -25,9 +25,17 @@ int main()
     playerPos.x = windowWidth / 2 - playerTexture.width / 2;
     playerPos.y = windowHeight - playerTexture.height;
 
+    // animation frame
+    int frame{};
+    // amount of time before we update the animation frame
+    const float updateTime{1.0 / 12.0};
+    float runningTime{};
+
     SetTargetFPS(50);
     while (!WindowShouldClose())
     {
+
+        const float dT{GetFrameTime()};
 
         BeginDrawing();
         ClearBackground(RAYWHITE);
@@ -42,7 +50,7 @@ int main()
         else
         {
             // rectangle is in the air
-            velocity += gravity;
+            velocity += gravity * dT;
         }
 
         if (!isInAir && IsKeyPressed(KEY_SPACE))
@@ -51,7 +59,17 @@ int main()
             velocity += jumpVal;
         }
 
-        playerPos.y += velocity;
+        playerPos.y += velocity * dT;
+
+        // update running time
+        runningTime += dT;
+        if (runningTime >= updateTime)
+        {
+            runningTime = 0.0;
+            // update animation frame
+            playerRec.x = frame * playerRec.width;
+            frame = ++frame % 6;
+        }
 
         DrawTextureRec(playerTexture, playerRec, playerPos, WHITE);
 
