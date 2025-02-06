@@ -8,14 +8,19 @@ int main()
 
     const int gravity{1};
 
-    // rectangle dimensions
-    const int width{50};
-    const int height{80};
-
     bool isInAir{};
     int jumpVal{-18};
 
-    int posY{windowHeight - height};
+    Texture2D playerTexture = LoadTexture("textures/player.png");
+    Rectangle playerRec;
+    playerRec.width = playerTexture.width / 6;
+    playerRec.height = playerTexture.height;
+    playerRec.x = 0;
+    playerRec.y = 0;
+    Vector2 playerPos;
+    playerPos.x = windowWidth / 2 - playerTexture.width / 2;
+    playerPos.y = windowHeight - playerTexture.height;
+
     int velocity{0};
 
     InitWindow(windowWidth, windowHeight, "Hello, Raylib!");
@@ -28,7 +33,7 @@ int main()
         ClearBackground(RAYWHITE);
 
         // perform ground check
-        if (posY >= windowHeight - height)
+        if (playerPos.y >= windowHeight - playerRec.height)
         {
             // rectangle is on the ground
             velocity = 0;
@@ -46,9 +51,9 @@ int main()
             velocity += jumpVal;
         }
 
-        posY += velocity;
+        playerPos.y += velocity;
 
-        DrawRectangle(windowWidth / 2, posY, width, height, BLUE);
+        DrawTextureRec(playerTexture, playerRec, playerPos, WHITE);
 
         EndDrawing();
     }
